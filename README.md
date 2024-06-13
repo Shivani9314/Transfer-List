@@ -1,6 +1,6 @@
 # Transfer List project
 
 
-![](screenshot.png)  
+![](updatedScreenshot.png)  
 
 #### Live Link : https://transfer-list.vercel.app/
