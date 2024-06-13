@@ -78,10 +78,10 @@ const ParentComponent = () => {
                     <button className='grid place-content-center p-2 px-5 bg-slate-200'>
                         <FontAwesomeIcon icon={faAnglesLeft} onClick={moveAllToLeft} />
                     </button>
-                    <button disabled={leftBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-red-100'>
+                    <button disabled={leftBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-slate-50'>
                         <FontAwesomeIcon icon={faAngleLeft} onClick={moveToLeft} />
                     </button>
-                    <button disabled={rightBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-red-100'>
+                    <button disabled={rightBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-slate-50'>
                         <FontAwesomeIcon icon={faAngleRight} onClick={moveToRight} />
                     </button>
                     <button className='grid place-content-center p-2 px-5 bg-slate-200'>
