@@ -18,35 +18,26 @@ const ParentComponent = () => {
         { label: 'Svelte', checked: false },
     ]);
 
-    const [leftBtn, setLeftBtn] = useState(true);
-    const [rightBtn, setRightBtn] = useState(true);
-
     const handleList1Change = (index) => {
         const newList = [...list1];
         newList[index].checked = !newList[index].checked;
         setList1(newList);
-        const anyChecked = newList.some(item => item.checked);
-        setRightBtn(!anyChecked);
     };
 
     const handleList2Change = (index) => {
         const newList = [...list2];
         newList[index].checked = !newList[index].checked;
         setList2(newList);
-        const anyChecked = newList.some(item => item.checked);
-        setLeftBtn(!anyChecked);
     };
 
     const moveAllToLeft = () => {
         setList1([...list1, ...list2]);
         setList2([]);
-        setLeftBtn(true);
     }
 
     const moveAllToRight = () => {
         setList2([...list2, ...list1]);
         setList1([]);
-        setRightBtn(true);
     }
 
     const moveToLeft = () => {
@@ -55,7 +46,6 @@ const ParentComponent = () => {
 
         setList1([...list1, ...checkedItems]);
         setList2(uncheckedItems);
-        setLeftBtn(true);
     }
 
     const moveToRight = () => {
@@ -64,28 +54,30 @@ const ParentComponent = () => {
 
         setList2([...list2, ...checkedItems]);
         setList1(uncheckedItems);
-        setRightBtn(true);
     }
+
+    const isLeftDisabled = !list2.some((item) => item.checked);
+    const isRightDisabled = !list1.some((item) => item.checked);
 
     return (
         <div className='w-2/4 border-2 border-black h-fit'>
             <header className='w-30 text-xl text-center p-10 border-2 border-black'>Transfer List</header>
-            <div className='flex '>
-                <div className='w-full '>
+            <div className='flex'>
+                <div className='w-full'>
                     <CheckboxList checkboxes={list1} handleChange={handleList1Change} />
                 </div>
                 <div className='flex flex-col gap-8 w-20 border-r-2 border-l-2 border-black p-6'>
-                    <button className='grid place-content-center p-2 px-5 bg-slate-200'>
-                        <FontAwesomeIcon icon={faAnglesLeft} onClick={moveAllToLeft} />
+                    <button className='grid place-content-center p-2 px-5 bg-slate-200' onClick={moveAllToLeft}>
+                        <FontAwesomeIcon icon={faAnglesLeft} />
                     </button>
-                    <button disabled={leftBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-slate-50'>
-                        <FontAwesomeIcon icon={faAngleLeft} onClick={moveToLeft} />
+                    <button disabled={isLeftDisabled} className={`grid place-content-center p-2 px-5 bg-slate-200 ${isLeftDisabled ? 'disabled:bg-slate-50' : ''}`} onClick={moveToLeft}>
+                        <FontAwesomeIcon icon={faAngleLeft} />
                     </button>
-                    <button disabled={rightBtn} className='grid place-content-center p-2 px-5 bg-slate-200 disabled:bg-slate-50'>
-                        <FontAwesomeIcon icon={faAngleRight} onClick={moveToRight} />
+                    <button disabled={isRightDisabled} className={`grid place-content-center p-2 px-5 bg-slate-200 ${isRightDisabled ? 'disabled:bg-slate-50' : ''}`} onClick={moveToRight}>
+                        <FontAwesomeIcon icon={faAngleRight} />
                     </button>
-                    <button className='grid place-content-center p-2 px-5 bg-slate-200'>
-                        <FontAwesomeIcon icon={faAnglesRight} onClick={moveAllToRight} />
+                    <button className='grid place-content-center p-2 px-5 bg-slate-200' onClick={moveAllToRight}>
+                        <FontAwesomeIcon icon={faAnglesRight} />
                     </button>
                 </div>
                 <div className='w-full'>
